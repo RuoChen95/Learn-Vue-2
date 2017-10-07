@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_selflearning</title>
+    <style>
+        .hidden { display: none}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <ul id="tasks" :class="{'hidden': hidden_all}">
+            <li v-for="task in tasks" v-text="task.description"></li>
+        </ul>
+        <ul id="incompletedTasks" :class="{'hidden': hidden_incompleted}">
+            <li v-for="task in incompletedTasks" v-text="task.description"></li>
+        </ul>
+        <ul id="completedTasks" :class="{'hidden': hidden_completed}">
+            <li v-for="task in completedTasks" v-text="task.description"></li>
+        </ul>
+        <button @click="showAll">Show All</button>
+        <button @click="showCompleted">Show Completed</button>
+        <button @click="showIncompleted">Show Incompleted</button>
+    </div>
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#root',
+            data: {
+                message: "hello world",
+                tasks: [
+                    { description: 'Go to the store', completed: false},
+                    { description: 'Finish screencast', completed: false},
+                    { description: 'Make donation', completed: true}
+                ],
+                hidden_all: false,
+                hidden_incompleted: true,
+                hidden_completed: true
+            },
+            computed: {
+                incompletedTasks() {
+                    return this.tasks.filter(task => !task.completed);
+                },
+                completedTasks() {
+                    return this.tasks.filter(task => task.completed);
+                }
+            },
+            methods: {
+                showAll() {
+                    this.hidden_all = false;
+                    this.hidden_incompleted = true;
+                    this.hidden_completed = true
+                },
+                showCompleted() {
+                    this.hidden_all = true;
+                    this.hidden_incompleted = false;
+                    this.hidden_completed = true;
+                },
+                showIncompleted() {
+                    this.hidden_all = true;
+                    this.hidden_incompleted = true;
+                    this.hidden_completed = false;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

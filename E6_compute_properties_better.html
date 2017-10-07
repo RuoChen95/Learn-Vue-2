@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_selflearning</title>
+</head>
+<body>
+<div id="root">
+    <h1 v-text="title"></h1>
+    <ul>
+        <li v-for="task in tasks" v-text="task.description"></li>
+    </ul>
+    <button @click="all">Show All</button>
+    <button @click="completed">Show Completed</button>
+    <button @click="incompleted">Show Incompleted</button>
+</div>
+<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#root',
+        data: {
+            title: "All Tasks",
+            tasks: [
+                { description: 'Go to the store', completed: false},
+                { description: 'Finish screencast', completed: false},
+                { description: 'Make donation', completed: true}
+            ],
+            copyTasks: ""
+        },
+        mounted() {
+            this.copyTasks = this.tasks;
+        },
+//        computed: {
+//            incompletedTasks() {
+//                return this.tasks.filter(task => !task.completed);
+//            }
+//        },
+        methods: {
+            all() {
+                this.tasks = this.copyTasks;
+                this.title="All Tasks";
+                this.tasks = this.tasks;
+            },
+            completed() {
+                this.tasks = this.copyTasks;
+                this.title="Completed Tasks";
+                this.tasks = this.tasks.filter(task => task.completed);
+            },
+            incompleted() {
+                this.tasks = this.copyTasks;
+                this.title="Incompleted Tasks";
+                this.tasks = this.tasks.filter(task => !task.completed);
+            }
+        }
+    });
+</script>
+</body>
+</html>
