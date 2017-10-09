@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_selflearning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+</head>
+<body>
+
+<div id="root" class="container">
+
+    <!-- 当这个组件被applied的时候，调用onCouponApplied方法 -->
+    <coupon @applied="onCouponApplied"></coupon>
+
+    <h1 v-if="couponApplied">u use a coupon</h1>
+</div>
+
+<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+<script src="E12_main.js"></script>
+</body>
+</html>

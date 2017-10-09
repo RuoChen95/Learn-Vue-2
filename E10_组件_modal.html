@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_selflearning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+    <style>
+        body { padding-top: 40px; }
+    </style>
+</head>
+<body>
+    <div id="root" class="container">
+
+        <button @click="showModal = true">show modal</button>
+
+        <!-- 自定义行为"close"，行为触发改变此scope的变量 -->
+        <modal v-show="showModal" @close="showModal = false">
+
+            <!-- 放到组件的slot中 -->
+            <p>
+                asdjaskdj
+            </p>
+        </modal>
+
+        <!-- 使用is-active的class来控制其是否显示 -->
+        <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <p>
+                        blabalks
+                    </p>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

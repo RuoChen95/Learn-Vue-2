@@ -1,19 +1,23 @@
+//创立根元素用于监听事件
+window.Event = new Vue();
+
+
 window.Event = new class {
     constructor() {
         this.vue = new Vue();
     }
 
+    // 创造了两个"adapter"
     fire(event, data = null) {
-        this.vue.$emit(event, data)
+        this.vue.$emit(event, data);
     }
-
     listen(event, callback) {
-        this.vue.$on(event, callback)
+        this.vue.$on(event, callback);
     }
 };
 
 Vue.component('coupon', {
-    template: '<input placeholder="Enter your coupon code" @blur="onCouponApplied">',
+    template: '<input  @blur="onCouponApplied">',
 
     methods: {
         onCouponApplied() {
@@ -24,10 +28,6 @@ Vue.component('coupon', {
 
 new Vue({
     el: '#root',
-
-    data: {
-        couponApplied: false
-    },
 
     created() {
         Event.listen('applied', function(){

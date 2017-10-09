@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_selflearning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+    <style>
+        body { padding-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div id="root" class="container">
+
+
+    <!-- 行内组件：inline-template -->
+    <progress-view inline-template>
+        <div>
+
+            <h1>you have been complete {{ completionRate }}% </h1>
+
+            <button @click="completionRate += 10"></button>
+
+        </div>
+    </progress-view>
+
+</div>
+
+<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+<script src="E15_main.js"></script>
+</body>
+</html>

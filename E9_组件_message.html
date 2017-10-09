@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_selflearning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+    <style>
+        body { padding-top: 40px; }
+    </style>
+</head>
+<body>
+    <div id="root" class="container">
+        <h1>message的组件化:</h1>
+        <message title="Hello World" body="Lorem ipsum dolor sit amet."></message>
+
+        <h1>message的组件化2:</h1>
+        <message title="Hello World2" body="Lorem ipsum dolor sit amet2."></message>
+
+
+        <h1>我们想要的样子: </h1>
+        <article class="message">
+            <div class="message-header">
+                <p>Hello World</p>
+                <button class="delete" aria-label="delete"></button>
+            </div>
+            <div class="message-body">
+                Lorem ipsum dolor sit amet.
+            </div>
+        </article>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script src="E9_main.js"></script>
+</body>
+</html>
