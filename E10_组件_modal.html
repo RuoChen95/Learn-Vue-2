@@ -14,12 +14,9 @@
         <button @click="showModal = true">show modal</button>
 
         <!-- 自定义行为"close"，行为触发改变此scope的变量 -->
-        <modal v-show="showModal" @close="showModal = false">
-
+        <modal body="happy me happy you" v-show="showModal" @close="showModal = false">
             <!-- 放到组件的slot中 -->
-            <p>
-                asdjaskdj
-            </p>
+            <p>asdjaskdj</p>
         </modal>
 
         <!-- 使用is-active的class来控制其是否显示 -->
@@ -37,6 +34,30 @@
     </div>
 
     <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
-    <script src="main.js"></script>
+    <script>
+        Vue.component('modal', {
+            template:`
+                <div class="modal is-active">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box">
+                            <slot></slot>
+                            {{ body }}
+                        </div>
+                    </div>
+                    <button @click="$emit('close')" class="modal-close is-large" aria-label="close"></button>
+                </div>`,
+            props: {
+                body: {}
+            }
+        });
+
+        new Vue({
+            el: '#root',
+            data: {
+                showModal: false
+            }
+        });
+    </script>
 </body>
 </html>

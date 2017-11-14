@@ -7,15 +7,49 @@
 </head>
 <body>
 
-<div id="root" class="container">
+    <div id="root" class="container">
+        <!-- 当这个组件被applied的时候，调用onCouponApplied方法 -->
+        <!-- 当这个组件被clicked的时候，调用onCouponfocus方法 -->
+        <coupon @applied="onCouponApplied" @clicked="onCouponfocus"></coupon>
 
-    <!-- 当这个组件被applied的时候，调用onCouponApplied方法 -->
-    <coupon @applied="onCouponApplied"></coupon>
+        <h1 v-if="couponApplied">blur</h1>
+        <h1 v-if="couponfocus">focus</h1>
+    </div>
 
-    <h1 v-if="couponApplied">u use a coupon</h1>
-</div>
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+    <script>
+        Vue.component('coupon', {
+            template: `
+            <input @focus="onCouponfocus" @blur="onCouponApplied">
+        `,
+            methods: {
+                onCouponApplied() {
+                    //声明这个组件"被applied"了
+                    this.$emit('applied')
+                },
+                onCouponfocus() {
+                    this.$emit('clicked')
+                }
+            }
+        });
 
-<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
-<script src="E12_main.js"></script>
+        new Vue({
+            el: '#root',
+
+            data: {
+                couponApplied: false,
+                couponfocus: false
+            },
+
+            methods: {
+                onCouponApplied() {
+                    this.couponApplied = true;
+                },
+                onCouponfocus () {
+                    this.couponfocus = true
+                }
+            }
+        });
+    </script>
 </body>
 </html>

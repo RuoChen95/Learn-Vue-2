@@ -11,22 +11,34 @@
 <body>
 
 <div id="root" class="container">
-
-
     <!-- 行内组件：inline-template -->
     <progress-view inline-template>
         <div>
-
             <h1>you have been complete {{ completionRate }}% </h1>
-
-            <button @click="completionRate += 10"></button>
-
+            <button @click="completionRate += 10">+++</button>
         </div>
     </progress-view>
-
 </div>
 
 <script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
-<script src="E15_main.js"></script>
+<script>
+    Vue.component('progress-view', {
+        //通过某属性计算某不变的属性
+        computed: {
+            attributeName() {
+                return attributeValue;
+            }
+        },
+        data() {
+            return {
+                completionRate: 50
+            }
+        }
+    });
+
+    new Vue({
+        el: '#root'
+    });
+</script>
 </body>
 </html>
