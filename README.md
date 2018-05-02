@@ -8,3 +8,12 @@
 source: https://laracasts.com/series/learn-vue-2-step-by-step
 
 notebook: https://quip.com/uYtUAtgmANVt
+
+---
+
+准备学习一些更为深入的东西：
+- render函数
+    
+source：https://segmentfault.com/l/1500000008892728/play
+
+notebook：橙色笔记本
