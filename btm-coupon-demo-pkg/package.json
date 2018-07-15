@@ -1,0 +1,14 @@
+{
+  "name": "btm-coupon-demo-pkg",
+  "version": "1.0.6",
+  "description": "A demo package for coupon components for Bitmain order/userCenter/H5 projects.",
+  "main": "./components/coupon.vue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "coupon"
+  ],
+  "author": "ruochen.xie <ruochen.xie@bitmain.com> (http://ruochen95.github.io)",
+  "license": "ISC"
+}

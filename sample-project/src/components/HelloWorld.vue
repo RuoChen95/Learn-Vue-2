@@ -25,14 +25,16 @@
     <p>{{ countMsg }}</p>
     <hr>
     <main-foot></main-foot>
+    <coupon couponValue="1123"></coupon>
   </div>
 </template>
 
 <script>
   import MainFoot from './common/Foot.vue'
+  import Coupon from 'btm-coupon-demo-pkg/components/coupon.vue'
   export default {
     components: {
-      MainFoot
+      MainFoot, Coupon
     },
     name: 'HelloWorld',
     data () {
