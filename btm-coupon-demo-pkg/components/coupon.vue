@@ -3,7 +3,7 @@
         <div
                 :class="{couponImg: true, checked: couponChecked, disable: disableCoupon}">
             <div class="couponInfo">
-                <div class="countAndMoney">
+                <div class="countAndMoney" @click="$emit('select-coupon')">
                     <!-- ÊýÁ¿ -->
                     <div class="couponCount">*{{couponRemainCount}}</div>
                     <!-- ¼ÛÇ® -->
@@ -24,17 +24,18 @@
                 </div>
 
                 <div class="infoAndRules">
-                    <div class="moreInfo">
+                    <div class="moreInfo" @click="$emit('select-coupon')">
                         <div class="names" v-if="couponInfo">
                             <span class="couponName">{{couponInfo}}</span>
                         </div>
                         <div class="couponIdAndDonate">
                             <div class="couponId" v-html="$t('couponId') + couponId"></div>
-                            <slot></slot>
+                            <slot name="donateButton"></slot>
                         </div>
                         <div class="limitTime" v-html="$t('limitTime') + couponTimeInfo">
                         </div>
                     </div>
+
                     <div :class="{'rules': true, 'showRules': showRules}" @click="showRules = !showRules">
                         <span v-html="$t('moreRules')"></span>
                         <img class='inBold' src="./assets/imgs/icon-down.png">
@@ -56,10 +57,19 @@
             </template>
         </template>
 
+        <template v-else>
+            <img v-if="couponWillExpire == 1 && currentLang == 'zh'" class='willExpire' src="./assets/imgs/label01.png">
+            <img v-if="couponWillExpire == 1 && currentLang == 'en'" class='willExpire' src="./assets/imgs/label01_en.png">
+        </template>
+
+        <img :class="{select: true, checked: couponChecked}" src="./assets/imgs/coupon-icon-select.png">
+
         <div class="couponRules" v-if="showRules">
             <div v-html="couponRules" v-if="couponRules"></div>
             <div v-else></div>
         </div>
+
+        <slot name="quantity"></slot>
     </div>
 </template>
 <script>
@@ -104,9 +114,13 @@
 				type: String,
 				default: 'Used'
 			},
+			couponWillExpire: {
+				type: Number,
+				default: 0
+			},
 			couponChecked: {
 				type: Boolean,
-				required: true
+				default: false
 			},
 			couponRemainCount: {
 				type: Number
@@ -342,5 +356,20 @@
     img.couponCondition {
         position: absolute;
         right: 0;
+    }
+
+    img.willExpire {
+        position: absolute;
+        right: 0;
+    }
+    img.select {
+        position: absolute;
+        display: none;
+        left: 0;
+
+        transition: all ease 0.3s;
+    }
+    img.select.checked {
+        display: inline-block;
     }
 </style>
