@@ -4,9 +4,9 @@
                 :class="{couponImg: true, checked: couponChecked, disable: disableCoupon}">
             <div class="couponInfo">
                 <div class="countAndMoney" @click="$emit('select-coupon')">
-                    <!-- ÊıÁ¿ -->
+                    <!-- ï¿½ï¿½ï¿½ï¿½ -->
                     <div class="couponCount">*{{couponRemainCount}}</div>
-                    <!-- ¼ÛÇ® -->
+                    <!-- ï¿½ï¿½Ç® -->
                     <div class="money">
                 <span>
                   <span class="currency">
@@ -17,7 +17,7 @@
                   </span>
                 </span>
                     </div>
-                    <!-- ÀàĞÍ -->
+                    <!-- ï¿½ï¿½ï¿½ï¿½ -->
                     <div class="couponType">
                         {{$t('type.item')}}
                     </div>
@@ -86,20 +86,20 @@
 					limitTime: 'Validity&nbsp;Time:&nbsp;'
 				},
 				zh: {
-					type: {
-						item: 'Á¢¼õÈ¯',
-						cart: 'Âú¼õÈ¯'
-					},
-					moreRules: '¸ü¶àÊ¹ÓÃ¹æÔò',
-					couponId: 'ÓÅ»İÈ¯ID£º',
-					limitTime: 'ÓĞĞ§ÆÚ£º'
+                    type: {
+                        item: 'ç«‹å‡åˆ¸',
+                        cart: 'æ»¡å‡åˆ¸'
+                    },
+                    moreRules: 'æ›´å¤šä½¿ç”¨è§„åˆ™',
+                    couponId: 'ä¼˜æƒ åˆ¸IDï¼š',
+                    limitTime: 'æœ‰æ•ˆæœŸï¼š'
 				}
 			}
 		},
 		filters: {
 			stringToIcon: function (value) {
 				if (value == 'CNY') {
-					return '?'
+					return 'Â¥'
 				} else {
 					return '$'
 				}
@@ -325,7 +325,7 @@
                     }
                 }
             }
-            // Ñ¡ÖĞ°´Å¥
+            // Ñ¡ï¿½Ğ°ï¿½Å¥
             .icon-bt-coupon-pressed {
                 position: absolute;
                 top: 46px;
