@@ -4,9 +4,10 @@
                 :class="{couponImg: true, checked: couponChecked, disable: disableCoupon}">
             <div class="couponInfo">
                 <div class="countAndMoney" @click="$emit('select-coupon')">
-                    <!-- ���� -->
+                    <!-- 优惠券数量 -->
                     <div class="couponCount">*{{couponRemainCount}}</div>
-                    <!-- ��Ǯ -->
+
+                    <!-- 优惠券面值 -->
                     <div class="money">
                 <span>
                   <span class="currency">
@@ -17,7 +18,8 @@
                   </span>
                 </span>
                     </div>
-                    <!-- ���� -->
+
+                    <!-- 优惠券类型 -->
                     <div class="couponType">
                         {{$t('type.item')}}
                     </div>
@@ -25,8 +27,8 @@
 
                 <div class="infoAndRules">
                     <div class="moreInfo" @click="$emit('select-coupon')">
-                        <div class="names" v-if="couponInfo">
-                            <span class="couponName">{{couponInfo}}</span>
+                        <div class="names">
+                            <span class="couponName" v-if="couponInfo">{{couponInfo}}</span>
                         </div>
                         <div class="couponIdAndDonate">
                             <div class="couponId" v-html="$t('couponId') + couponId"></div>
@@ -86,13 +88,13 @@
 					limitTime: 'Validity&nbsp;Time:&nbsp;'
 				},
 				zh: {
-                    type: {
-                        item: '立减券',
-                        cart: '满减券'
-                    },
-                    moreRules: '更多使用规则',
-                    couponId: '优惠券ID：',
-                    limitTime: '有效期：'
+					type: {
+						item: '立减券',
+						cart: '满减券'
+					},
+					moreRules: '更多使用规则',
+					couponId: '优惠券ID：',
+					limitTime: '有效期：'
 				}
 			}
 		},
@@ -160,13 +162,17 @@
     @couponHeight: 128px;
     .coupon {
         position: relative;
-        margin-bottom: 21px;
-        margin-right: 50px;
+        /*margin-bottom: 21px;*/
+        /*margin-right: 50px;*/
 
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+
+        margin: 0 auto;
+
+        width: @couponWidth;
         .icon-bt-coupon-bg-1,
         .icon-bt-coupon-bg-2 {
             font-size: 90px;
@@ -179,6 +185,7 @@
             top: 0;
             .countAndMoney {
                 display: flex;
+
                 flex-direction: column;
                 color: white;
 
@@ -192,17 +199,21 @@
                     display: flex;
                     align-items: flex-end;
                     justify-content: flex-end;
-                    width: 100%;
+                    /*width: 100%;*/
                     padding-right: 5px;
                     margin-top: 15px;
+
+                    line-height: 21px;
                 }
                 div.money {
                     display: flex;
                     justify-content: space-around;
-                    width: 100%;
+                    /*width: 100%;*/
                     height: 37px;
                     padding-left: 5px;
                     padding-right: 5px;
+
+                    line-height: 37px;
                     span.currency {
                         font-size: 14px;
                     }
@@ -215,27 +226,30 @@
                     display: inline-block;
                     text-align: center;
                     color: white;
-                    width: 100%;
+                    /*width: 100%;*/
                     margin-top: 5px;
                     padding: 0 7px;
 
-                    font-size: 12px;
-
+                    font-size: 13px;
+                    line-height: 18px;
                 }
             }
             .infoAndRules {
                 width: 100%;
                 padding-left: 6px;
+                padding-top: 8px;
                 div.moreInfo {
                     display: flex;
                     flex-direction: column;
-                    height: 100px;
+                    /*justify-content: flex-end;*/
+                    height: 92px;
 
-                    padding-top: 8px;
+                    /*padding-bottom: 8px;*/
                     div.names {
                         display: flex;
                         align-items: center;
                         width: 217px;
+                        height: 20px;
                         span.couponName {
                             display: inline-block;
 
@@ -251,11 +265,10 @@
                         }
                     }
                     div.couponIdAndDonate {
-                        div.couponId {
-                            word-break: break-all;
-                            width: 180px;
-                        }
-                        div.donateButtton {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-right: 15px;
+                        div.donateButton {
                             display: inline-block;
                             width: 54px;
                             height: 18px;
@@ -280,12 +293,15 @@
                         margin-top: 3px;
                         color: #BCBCBC;
                         display: inline-block;
-                        width: 217px;
                         word-wrap: break-word;
                         white-space: normal;
 
                         font-size: 12px;
                         line-height: 14px;
+                    }
+                    div.couponId {
+                        word-break: break-all;
+                        width: 158px;
                     }
                 }
                 div.rules {
@@ -339,6 +355,8 @@
         width: @couponWidth;
         height: @couponHeight;
         background: url("./assets/imgs/coupon-bg.png");
+        background-repeat:no-repeat;
+        background-size: @couponWidth @couponHeight;
     }
     .couponImg.disable {
         background: url("./assets/imgs/coupon-bg-dis.png");
@@ -347,11 +365,17 @@
     div.couponRules {
         width: @couponWidth;
         min-height: 35px;
-        padding: 8px 12px;
         border: 1px solid #EFEFF4;
         border-radius: 4px;
 
         color: #BCBCBC;
+        background-color: white;
+        white-space: pre;
+        div {
+            margin: 8px 12px;
+            white-space: pre;
+            line-height: 21px;
+        }
     }
     img.couponCondition {
         position: absolute;
