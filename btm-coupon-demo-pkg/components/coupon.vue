@@ -213,7 +213,7 @@
                     padding-left: 5px;
                     padding-right: 5px;
 
-                    line-height: 37px;
+                    line-height: 31px;
                     span.currency {
                         font-size: 14px;
                     }
@@ -228,10 +228,12 @@
                     color: white;
                     /*width: 100%;*/
                     margin-top: 5px;
-                    padding: 0 7px;
+                    padding: 0 5px;
 
-                    font-size: 13px;
+                    font-size: 12px;
                     line-height: 18px;
+                    letter-spacing: 0;
+                    word-spacing: 0;
                 }
             }
             .infoAndRules {
