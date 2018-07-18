@@ -13,7 +13,7 @@
                   <span class="currency">
                     {{couponCurrency | stringToIcon}}
                   </span>
-                  <span class="price" v-bind:style="{fontSize: 46 - couponValue.length * 5 + 'px'}">
+                  <span class="price" v-bind:style="{fontSize: couponValue.length >=4 ? (44 - couponValue.length * 5 + 'px') : ('26px')}">
                     {{couponValue}}
                   </span>
                 </span>
@@ -193,8 +193,6 @@
                 height: @couponHeight;
                 flex-wrap: wrap;
                 flex-shrink: 0;
-
-                font-family: HelveticaNeue-Bold;
                 div.couponCount {
                     display: flex;
                     align-items: flex-end;
@@ -244,7 +242,7 @@
                     display: flex;
                     flex-direction: column;
                     /*justify-content: flex-end;*/
-                    height: 92px;
+                    height: 90px;
 
                     /*padding-bottom: 8px;*/
                     div.names {
@@ -252,10 +250,11 @@
                         align-items: center;
                         width: 217px;
                         height: 20px;
+                        margin-bottom: 5px;
                         span.couponName {
                             display: inline-block;
 
-                            font-size: 14px;
+                            font-size: 15px;
                             line-height: 20px;
                             height: 20px;
                             color: #5C5C5C;
@@ -301,6 +300,9 @@
                         font-size: 12px;
                         line-height: 14px;
                     }
+                    div.limitTime {
+                        margin-top: 5px;
+                    }
                     div.couponId {
                         word-break: break-all;
                         width: 158px;
@@ -343,7 +345,6 @@
                     }
                 }
             }
-            // ѡ�а�ť
             .icon-bt-coupon-pressed {
                 position: absolute;
                 top: 46px;
@@ -361,32 +362,44 @@
         background-size: @couponWidth @couponHeight;
     }
     .couponImg.disable {
+        position: relative;
+        width: @couponWidth;
+        height: @couponHeight;
         background: url("./assets/imgs/coupon-bg-dis.png");
+        background-repeat:no-repeat;
+        background-size: @couponWidth @couponHeight;
     }
 
     div.couponRules {
         width: @couponWidth;
         min-height: 35px;
         border: 1px solid #EFEFF4;
+        border-top-width: 0;
         border-radius: 4px;
 
         color: #BCBCBC;
         background-color: white;
         white-space: pre;
         div {
-            margin: 8px 12px;
+            margin: 12px;
             white-space: pre;
-            line-height: 21px;
+            line-height: 17px;
         }
     }
     img.couponCondition {
         position: absolute;
         right: 0;
+
+        width: 47px;
+        height: 45px;
     }
 
     img.willExpire {
         position: absolute;
         right: 0;
+
+        width: 47px;
+        height: 45px;
     }
     img.select {
         position: absolute;
