@@ -10,12 +10,19 @@
                     <!-- 优惠券面值 -->
                     <div class="money">
                 <span>
-                  <span class="currency">
-                    {{couponCurrency | stringToIcon}}
-                  </span>
-                  <span class="price" v-bind:style="{fontSize: couponValue.length >=4 ? (44 - couponValue.length * 5 + 'px') : ('26px')}">
-                    {{couponValue}}
-                  </span>
+                  <template v-if="couponCurrency == 'USD' || couponCurrency == 'CNY'">
+                    <span class="currency">
+                      {{couponCurrency | stringToIcon}}
+                    </span>
+                    <span class="price" v-bind:style="{fontSize: couponValue.length >=4 ? (44 - couponValue.length * 5 + 'px') : ('26px')}">
+                      {{couponValue}}
+                    </span>
+                  </template>
+                  <template v-else>
+                    <span class="price" v-bind:style="{fontSize: (couponValue.length + couponCurrency.length) >=4 ? (40 - couponValue.length * 5 + 'px') : ('22px')}">
+                      {{couponValue}} {{couponCurrency}}
+                    </span>
+                  </template>
                 </span>
                     </div>
 
@@ -41,7 +48,6 @@
                     <div :class="{'rules': true, 'showRules': showRules}" @click="showRules = !showRules">
                         <span v-html="$t('moreRules')"></span>
                         <img class='inBold' src="./assets/imgs/icon-down.png">
-                        <img class='bold' src="./assets/imgs/icon-down.svg">
                     </div>
                 </div>
 
@@ -322,21 +328,7 @@
                         &.inBold {
                             display: inline-block;
                         }
-                        &.bold {
-                            display: none;
-                        }
                         transition: all ease 0.4s;
-                    }
-                    &:hover {
-                        transition: color 0.3s ease;
-                        img {
-                            &.inBold {
-                                display: none;
-                            }
-                            &.bold {
-                                display: inline-block;
-                            }
-                        }
                     }
                 }
                 div.showRules {
