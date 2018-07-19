@@ -19,7 +19,7 @@
                     </span>
                   </template>
                   <template v-else>
-                    <span class="price" v-bind:style="{fontSize: (couponValue.length + couponCurrency.length) >=4 ? (40 - couponValue.length * 5 + 'px') : ('22px')}">
+                    <span class="price" v-bind:style="{fontSize: (47 - (couponValue.length + couponCurrency.length) * 5 + 'px')}">
                       {{couponValue}} {{couponCurrency}}
                     </span>
                   </template>
@@ -38,10 +38,8 @@
                             <span class="couponName" v-if="couponInfo">{{couponInfo}}</span>
                         </div>
                         <div class="couponIdAndDonate">
-                            <div class="couponId" v-html="$t('couponId') + couponId"></div>
+                            <div class="couponId" v-html="couponTimeInfo"></div>
                             <slot name="donateButton"></slot>
-                        </div>
-                        <div class="limitTime" v-html="$t('limitTime') + couponTimeInfo">
                         </div>
                     </div>
 
@@ -73,8 +71,10 @@
         <img :class="{select: true, checked: couponChecked}" src="./assets/imgs/coupon-icon-select.png">
 
         <div class="couponRules" v-if="showRules">
+            <div v-html="$t('couponId')" class="couponIdTitle"></div>
+            <div class="couponId" v-html="couponId"></div>
+            <div v-html="$t('couponRules')" class="title couponRulesTitle" v-if="couponRules"></div>
             <div v-html="couponRules" v-if="couponRules"></div>
-            <div v-else></div>
         </div>
 
         <slot name="quantity"></slot>
@@ -89,8 +89,9 @@
 						item: 'Item coupon',
 						cart: 'Cart coupon'
 					},
-					moreRules: 'More usage rules',
+					moreRules: 'More',
 					couponId: 'Coupon&nbsp;ID:&nbsp;',
+					couponRules: 'Coupon usage rules: ',
 					limitTime: 'Validity&nbsp;Time:&nbsp;'
 				},
 				zh: {
@@ -98,8 +99,9 @@
 						item: '立减券',
 						cart: '满减券'
 					},
-					moreRules: '更多使用规则',
+					moreRules: '更多',
 					couponId: '优惠券ID：',
+					couponRules: '优惠券使用规则：',
 					limitTime: '有效期：'
 				}
 			}
@@ -208,6 +210,7 @@
                     margin-top: 15px;
 
                     line-height: 21px;
+                    font-size: 12px;
                 }
                 div.money {
                     display: flex;
@@ -242,13 +245,12 @@
             }
             .infoAndRules {
                 width: 100%;
-                padding-left: 6px;
-                padding-top: 8px;
+                padding-left: 10px;
                 div.moreInfo {
                     display: flex;
                     flex-direction: column;
                     /*justify-content: flex-end;*/
-                    height: 90px;
+                    height: 98px;
 
                     /*padding-bottom: 8px;*/
                     div.names {
@@ -256,7 +258,9 @@
                         align-items: center;
                         width: 217px;
                         height: 20px;
-                        margin-bottom: 5px;
+
+                        margin-top: 15px;
+                        margin-bottom: 10px;
                         span.couponName {
                             display: inline-block;
 
@@ -274,7 +278,7 @@
                     div.couponIdAndDonate {
                         display: flex;
                         justify-content: space-between;
-                        padding-right: 15px;
+                        padding-right: 10px;
                         div.donateButton {
                             display: inline-block;
                             width: 54px;
@@ -311,7 +315,7 @@
                     }
                     div.couponId {
                         word-break: break-all;
-                        width: 158px;
+                        margin-right: 10px;
                     }
                 }
                 div.rules {
@@ -365,17 +369,29 @@
     div.couponRules {
         width: @couponWidth;
         min-height: 35px;
+        padding: 12px 0;
         border: 1px solid #EFEFF4;
         border-top-width: 0;
         border-radius: 4px;
 
         color: #BCBCBC;
         background-color: white;
-        white-space: pre;
+        white-space: pre-line;
+        word-break: break-all;
+
+        div.couponIdTitle,
+        div.couponRulesTitle{
+            color: #5C5C5C;
+        }
+        div.couponRulesTitle {
+            margin-top: 10px;
+        }
         div {
-            margin: 12px;
-            white-space: pre;
-            line-height: 17px;
+            padding: 0 12px;
+            white-space: pre-line;
+            word-break: break-all;
+            line-height: 15px;
+            font-size: 12px;
         }
     }
     img.couponCondition {
@@ -383,7 +399,7 @@
         right: 0;
 
         width: 47px;
-        height: 45px;
+        height: 47px;
     }
 
     img.willExpire {
@@ -391,7 +407,7 @@
         right: 0;
 
         width: 47px;
-        height: 45px;
+        height: 47px;
     }
     img.select {
         position: absolute;
