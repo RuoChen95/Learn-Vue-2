@@ -282,6 +282,7 @@
                         div.donateButton {
                             display: inline-block;
                             width: 54px;
+                            flex-shrink: 0;
                             height: 18px;
                             line-height: 16px;
                             border: 1px solid #6DB6F3;
