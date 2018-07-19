@@ -201,6 +201,7 @@
                 height: @couponHeight;
                 flex-wrap: wrap;
                 flex-shrink: 0;
+                -ms-flex-negative: 0;
                 div.couponCount {
                     display: flex;
                     align-items: flex-end;
@@ -416,6 +417,7 @@
         position: absolute;
         display: none;
         left: 0;
+        top: 0;
 
         transition: all ease 0.3s;
     }

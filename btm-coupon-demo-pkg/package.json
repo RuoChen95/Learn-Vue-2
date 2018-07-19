@@ -1,6 +1,6 @@
 {
   "name": "btm-coupon-demo-pkg",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "A demo package for coupon components for Bitmain order/userCenter/H5 projects.",
   "main": "./index.js",
   "scripts": {
