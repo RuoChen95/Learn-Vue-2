@@ -5,7 +5,7 @@
             <div class="couponInfo">
                 <div class="countAndMoney" @click="$emit('select-coupon')">
                     <!-- 优惠券数量 -->
-                    <div class="couponCount">*{{couponRemainCount}}</div>
+                    <div class="couponCount">x{{couponRemainCount}}</div>
 
                     <!-- 优惠券面值 -->
                     <div class="money">
@@ -19,7 +19,7 @@
                     </span>
                   </template>
                   <template v-else>
-                    <span class="price" v-bind:style="{fontSize: (47 - (couponValue.length + couponCurrency.length) * 5 + 'px')}">
+                    <span class="price" v-bind:style="{fontSize: (30 - (couponValue.length + couponCurrency.length) * 2 + 'px')}">
                       {{couponValue}} {{couponCurrency}}
                     </span>
                   </template>
@@ -92,7 +92,7 @@
 					moreRules: 'More',
 					couponId: 'Coupon&nbsp;ID:&nbsp;',
 					couponRules: 'Coupon usage rules: ',
-					limitTime: 'Validity&nbsp;Time:&nbsp;'
+					limitTime: 'Expiry Date: '
 				},
 				zh: {
 					type: {
@@ -398,6 +398,7 @@
     img.couponCondition {
         position: absolute;
         right: 0;
+        top: 0;
 
         width: 47px;
         height: 47px;
@@ -406,6 +407,7 @@
     img.willExpire {
         position: absolute;
         right: 0;
+        top: 0;
 
         width: 47px;
         height: 47px;
