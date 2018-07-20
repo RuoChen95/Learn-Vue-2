@@ -38,7 +38,8 @@
                             <span class="couponName" v-if="couponInfo">{{couponInfo}}</span>
                         </div>
                         <div class="couponIdAndDonate">
-                            <div class="couponId" v-html="couponTimeInfo"></div>
+                            <div class="couponId" v-html="$t('limitTime') +couponTimeInfo" v-if="couponTimeInfo == 'None' || couponTimeInfo == '不限制'"></div>
+                            <div class="couponId" v-html="couponTimeInfo" v-else></div>
                             <slot name="donateButton"></slot>
                         </div>
                     </div>
@@ -379,7 +380,7 @@
         color: #BCBCBC;
         background-color: white;
         white-space: pre-line;
-        word-break: break-all;
+        word-break: break-word;
 
         div.couponIdTitle,
         div.couponRulesTitle{
@@ -391,7 +392,7 @@
         div {
             padding: 0 12px;
             white-space: pre-line;
-            word-break: break-all;
+            word-break: break-word;
             line-height: 15px;
             font-size: 12px;
         }
