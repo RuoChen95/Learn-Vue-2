@@ -1,0 +1,44 @@
+{
+  "name": "btm-demo-pkg",
+  "version": "0.1.0",
+  "main": "./index.js",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-rc.5",
+    "@vue/cli-service": "^3.0.0-rc.5",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "vue-i18n": "^8.0.0",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "keywords": [
+    "btm",
+    "vue",
+    "vue.js",
+    "component",
+    "components",
+    "ui",
+    "framework"
+  ],
+  "author": "ruochen.xie <ruochen.xie@bitmain.com> (http://ruochen95.github.io)",
+  "license": "ISC"
+}
