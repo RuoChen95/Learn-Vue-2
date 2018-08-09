@@ -14,12 +14,12 @@
                     <span class="currency">
                       {{couponCurrency | stringToIcon}}
                     </span>
-                    <span class="price" v-bind:style="{fontSize: couponValue.length >=4 ? (44 - couponValue.length * 5 + 'px') : ('26px')}">
+                    <span class="price" v-bind:style="{fontSize: couponValue.length >=4 ? ((44 - couponValue.length * 5) > 12 ? (44 - couponValue.length * 5 + 'px') : '12px') : ('26px')}">
                       {{couponValue}}
                     </span>
                   </template>
                   <template v-else>
-                    <span class="price" v-bind:style="{fontSize: (30 - (couponValue.length + couponCurrency.length) * 2 + 'px')}">
+                    <span class="price" v-bind:style="{fontSize: (30 - (couponValue.length + couponCurrency.length) * 2) > 12 ? (30 - (couponValue.length + couponCurrency.length) * 2 + 'px') : '12px'}">
                       {{couponValue}} {{couponCurrency}}
                     </span>
                   </template>
@@ -27,8 +27,11 @@
                     </div>
 
                     <!-- 优惠券类型 -->
-                    <div class="couponType">
+                    <div class="couponType" v-if="offerType == '0'">
                         {{$t('type.item')}}
+                    </div>
+                    <div class="couponType" v-if="offerType == '1'">
+                        {{$t('type.cart')}}
                     </div>
                 </div>
 
@@ -37,14 +40,22 @@
                         <div class="names">
                             <span class="couponName" v-if="couponInfo">{{couponInfo}}</span>
                         </div>
+
+                        <!-- 满减限额-->
+                        <div class="limitMoney">
+                            <template v-if="offerType == '1'">
+                                {{$t('limitMoney',{msg: limitMoney})}}
+                            </template>
+                        </div>
+
                         <div class="couponIdAndDonate">
-                            <div class="couponId" v-html="$t('limitTime') +couponTimeInfo" v-if="couponTimeInfo == 'None' || couponTimeInfo == '不限制'"></div>
+                            <div class="couponId" v-html="$t('limitTime') + couponTimeInfo" v-if="couponTimeInfo == 'None' || couponTimeInfo == '不限制'"></div>
                             <div class="couponId" v-html="couponTimeInfo" v-else></div>
                             <slot name="donateButton"></slot>
                         </div>
                     </div>
 
-                    <div :class="{'rules': true, 'showRules': showRules}" @click="showRules = !showRules">
+                    <div :class="{'rules': true, 'showRules': showRules}" @click="showRules = !showRules; $emit('show-rules')">
                         <span v-html="$t('moreRules')"></span>
                         <img class='inBold' src="./assets/imgs/icon-down.png">
                     </div>
@@ -88,83 +99,90 @@
 				en: {
 					type: {
 						item: 'Item coupon',
-						cart: 'Cart coupon'
+						cart: 'Cart coupon',
 					},
 					moreRules: 'More',
 					couponId: 'Coupon&nbsp;ID:&nbsp;',
 					couponRules: 'Coupon usage rules: ',
-					limitTime: 'Expiry Date: '
+					limitTime: 'Expiry Date: ',
+					limitMoney: 'For product priced above USD {msg}',
 				},
 				zh: {
 					type: {
 						item: '立减券',
-						cart: '满减券'
+						cart: '限额立减券',
 					},
 					moreRules: '更多',
 					couponId: '优惠券ID：',
 					couponRules: '优惠券使用规则：',
-					limitTime: '有效期：'
-				}
-			}
+					limitTime: '有效期：',
+					limitMoney: '商品单价满{msg}可用',
+				},
+			},
 		},
 		filters: {
-			stringToIcon: function (value) {
+			stringToIcon: function(value) {
 				if (value == 'CNY') {
-					return '¥'
+					return '¥';
 				} else {
-					return '$'
+					return '$';
 				}
-			}
+			},
 		},
 		props: {
+			offerType: {
+				type: String,
+				default: '0',
+			},
+			limitMoney: {
+				type: String,
+				default: '%0%',
+			},
 			disableCoupon: {
 				type: Boolean,
-				default: false
+				default: false,
 			},
 			disableCondition: {
 				type: String,
-				default: 'Used'
+				default: 'Used',
 			},
 			couponWillExpire: {
 				type: Number,
-				default: 0
+				default: 0,
 			},
 			couponChecked: {
 				type: Boolean,
-				default: false
+				default: false,
 			},
 			couponRemainCount: {
-				type: Number
+				type: Number,
 			},
 			couponCurrency: {
-				type: String
+				type: String,
 			},
 			couponValue: {
-				type: String
+				type: String,
 			},
-//      couponType: {
-//        type: String
-//      },
 			couponInfo: {
-				type: String
+				type: String,
 			},
 			couponId: {
-				type: String
+				type: String,
 			},
 			couponTimeInfo: {
-				type: String
+				type: String,
 			},
 			couponRules: {
-				type: String
-			}
+				type: String,
+			},
 		},
-		data: function () {
+		data: function() {
 			return {
 				showRules: false,
-				currentLang: localStorage.getItem('lang')
-			}
-		}
-	}
+				currentLang: localStorage.getItem('lang'),
+			};
+		},
+	};
 </script>
 <style scoped lang="less" type="text/less">
     @couponWidth: 351px;
@@ -221,14 +239,17 @@
                     height: 37px;
                     padding-left: 5px;
                     padding-right: 5px;
+                    margin-top: 5px;
 
                     line-height: 31px;
-                    span.currency {
-                        font-size: 14px;
-                    }
-                    span.price {
-                        font-size: 31px;
-                        line-height: 31px;
+                    > span {
+                        line-height: 20px;
+                        span.currency {
+                            font-size: 14px;
+                        }
+                        span.price {
+                            word-break: break-all;
+                        }
                     }
                 }
                 div.couponType {
@@ -269,7 +290,7 @@
                             font-size: 15px;
                             line-height: 20px;
                             height: 20px;
-                            color: #5C5C5C;
+                            color: #5c5c5c;
 
                             white-space: nowrap;
 
@@ -287,38 +308,41 @@
                             flex-shrink: 0;
                             height: 18px;
                             line-height: 16px;
-                            border: 1px solid #6DB6F3;
+                            border: 1px solid #6db6f3;
                             border-radius: 9px;
+                            margin-top: 3px;
 
                             font-size: 12px;
-                            color: #529BD7;
+                            color: #529bd7;
                             text-align: center;
 
                             cursor: pointer;
                             transition: all 0.3s ease;
                             &:hover {
-                                background-color: #6DB6F3;
+                                background-color: #6db6f3;
                                 color: white;
                             }
                         }
                     }
                     div.couponId,
-                    div.limitTime{
-                        margin-top: 3px;
-                        color: #BCBCBC;
+                    div.limitTime,
+                    div.limitMoney {
+                        color: #bcbcbc;
                         display: inline-block;
                         word-wrap: break-word;
                         white-space: normal;
 
                         font-size: 12px;
                         line-height: 14px;
+                        min-height: 14px;
                     }
                     div.limitTime {
                         margin-top: 5px;
                     }
                     div.couponId {
+                        margin-top: 3px;
+                        line-height: 18px;
                         word-break: break-all;
-                        margin-right: 10px;
                     }
                 }
                 div.rules {
@@ -327,11 +351,12 @@
                     justify-content: space-between;
                     font-size: 12px;
                     line-height: 14px;
-                    color: #BCBCBC;
+                    color: #bcbcbc;
                     height: 28px;
                     padding-right: 12px;
 
                     img {
+                        height: 12px;
                         &.inBold {
                             display: inline-block;
                         }
@@ -340,7 +365,7 @@
                 }
                 div.showRules {
                     img {
-                        transform:rotate(-180deg);
+                        transform: rotate(-180deg);
                     }
                 }
             }
@@ -356,16 +381,16 @@
         position: relative;
         width: @couponWidth;
         height: @couponHeight;
-        background: url("./assets/imgs/coupon-bg.png");
-        background-repeat:no-repeat;
+        background: url('./assets/imgs/coupon-bg.png');
+        background-repeat: no-repeat;
         background-size: @couponWidth @couponHeight;
     }
     .couponImg.disable {
         position: relative;
         width: @couponWidth;
         height: @couponHeight;
-        background: url("./assets/imgs/coupon-bg-dis.png");
-        background-repeat:no-repeat;
+        background: url('./assets/imgs/coupon-bg-dis.png');
+        background-repeat: no-repeat;
         background-size: @couponWidth @couponHeight;
     }
 
@@ -373,18 +398,18 @@
         width: @couponWidth;
         min-height: 35px;
         padding: 12px 0;
-        border: 1px solid #EFEFF4;
+        border: 1px solid #efeff4;
         border-top-width: 0;
         border-radius: 4px;
 
-        color: #BCBCBC;
+        color: #bcbcbc;
         background-color: white;
         white-space: pre-line;
         word-break: break-word;
 
         div.couponIdTitle,
-        div.couponRulesTitle{
-            color: #5C5C5C;
+        div.couponRulesTitle {
+            color: #5c5c5c;
         }
         div.couponRulesTitle {
             margin-top: 10px;
