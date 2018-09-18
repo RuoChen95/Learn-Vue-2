@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Coupon from './views/Coupon.vue'
+import Stepper from './views/Stepper.vue'
+import ImgLazyload from './views/ImgLazyload.vue'
 
 Vue.use(Router)
 
@@ -21,6 +23,14 @@ export default new Router({
 		{
 			path: '/coupon',
 			component: Coupon
-		}
+		},
+    {
+      path: '/stepper',
+      component: Stepper
+    },
+    {
+      path: '/imgLazyload',
+      component: ImgLazyload
+    }
   ]
 })
