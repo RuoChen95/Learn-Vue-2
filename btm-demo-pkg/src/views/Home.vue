@@ -15,3 +15,9 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+    div.home {
+        margin: 25px;
+    }
+</style>
+

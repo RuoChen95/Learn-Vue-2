@@ -1,5 +1,10 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <p>There are some components build for company projects.</p>
   </div>
 </template>
+<style lang="less" scoped>
+    div.about {
+        margin: 25px;
+    }
+</style>
