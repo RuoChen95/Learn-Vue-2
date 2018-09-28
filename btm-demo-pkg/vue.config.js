@@ -1,13 +1,13 @@
 // vue.config.js
 module.exports = {
-	// options...
+  baseUrl: './',
 	css: {
 		extract: false
 	},
 	configureWebpack: {
 		output: {
 			// only used in build library
-			libraryExport: 'default'
+			libraryExport: 'default',
 		}
 	}
 }
